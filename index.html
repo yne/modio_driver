@@ -1,0 +1,19 @@
+<!doctype HTML>
+<html>
+<body>
+<style>h1{ page-break-before:always;}</style>
+<div id="t" class="container" style="text-align:justify"></div>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/marked/0.3.2/marked.min.js"></script>
+<script>
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function(){
+		document.getElementById('t').innerHTML=marked(this.responseText.replace(/&gt;/g,'>').replace(/&lt;/g,'<'))
+			.replace(/<table/g,'<table class="table table-bordered table-striped"')
+			.replace(/<img/g,'<img class="img-responsive"');
+	};
+	xhr.open("get", "README.md", true);
+	xhr.send();
+</script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+</body>
+</html>
