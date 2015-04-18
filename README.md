@@ -1,6 +1,9 @@
 Travail effectué
 ================
 
+- [Source](https://github.com/yne/modio_driver)
+- [Archive](https://github.com/yne/modio_driver/archive/gh-pages.zip)
+
 Gestion des entrées / sorties
 --------
 
@@ -22,7 +25,7 @@ Cross compilation
 Afin de pouvoir exécuter le module sur notre cible (olimex A20)
 il faut mettre en place plusieurs choses :
 
-compilation du noyau
+[compilation du noyau](build_kernel.sh)
 --------------------
 Cette étape a été la plus complexe car elle nécessite le bon déroulement de plusieurs processus qui dépendent parfois d'utilitaires qui n'étaient pas présent sur les machines (makeinfo).
 Voici le script utilisé pour compiler le noyau ainsi que les outils de cross compilation.
@@ -179,7 +182,7 @@ Implémentation du driver
 
 Pour mener à bien l'implémentation, j'ai séparer le code en 4 parties :
 
-### Partie GPIO
+### [Partie GPIO](driver.pio.c)
 
 Cette partie contient les fonctions d'accès basiques au PIO :
 
@@ -277,7 +280,7 @@ Enfin les 2 fonctions d'initialisation et de finalisation :
 	}
 	```
 
-### Partie I2C
+### [Partie I2C](driver.pio.c)
 
 Cette partie contient l'implémentation du protocole i2c.
 
@@ -349,7 +352,7 @@ Je me suis créé une fonction dans le but d'alléger les couches supérieurs de
 	}
 	```
 
-### Partie applicative
+### [Partie applicative](driver.app.c)
 
 La partie applicative fait appel aux fonctions i2c et fournie une sur-couche simple pour le driver :
 
@@ -424,7 +427,7 @@ static int p_addr=MODIO_ID;
 module_param(p_addr, int, S_IRUGO);
 ```
 
-### Partie driver (File Operations)
+### [Partie driver (File Operations)](driver.fop.c)
 
 Cette partie est la couche de plus haut niveau, elle fournie les interfaces avec le kernel pour répondre aux appels open/read/write/close de l'utilisateur.
 
@@ -551,7 +554,7 @@ Cette partie initialise et finalise le module
 	}
 	```
 
-### Programme de test
+### [Programme de test](bench.c)
 
 Ce programme de test permet de vérifier si le driver répond correctement aux requêtes d'accès de l'utilisateur.
 Il appel donc les différentes fonctions du driver (open/read/write/close/ioctl)
@@ -602,7 +605,7 @@ rmmod remy_driver.ko
 dmesg
 ```
 
-Le fichier `bench.sh` regroupe la compilation du bench.c et son lancement.
+Le fichier [`bench.sh`](bench.sh) regroupe la compilation du [`bench.c`](bench.c) et son lancement.
 
 Documents utilisés
 ==================
